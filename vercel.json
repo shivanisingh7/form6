@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "public": {
-    "maxAge": 31536000
-  },
-  "routes": [
-    { "src": "/", "dest": "/index.html" }
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" }
+  ],
+  "public": false,  // Ensure this is a boolean value
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api" }
   ]
 }

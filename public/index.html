@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIIT-D Alumni Nomination Form</title>
+    <style>
+        body {
+            height: 100%;
+            background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/50598/concrete-wall-background.jpg) center center fixed;
+            background-size: cover;
+            font-family: 'Permanent Marker', cursive;
+            overflow: hidden;
+        }
+
+        .shade {
+            overflow: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: linear-gradient(150deg, rgba(0, 0, 0, 0.65), transparent);
+        }
+
+        /* Add stylish zoom-in with rotation animation */
+        .blackboard {
+            position: relative;
+            width: 640px;
+            margin: 5% auto;
+            padding: 40px;
+            border: tan solid 12px;
+            border-top: #bda27e solid 12px;
+            border-left: #b19876 solid 12px;
+            border-bottom: #c9ad86 solid 12px;
+            box-shadow: 0px 0px 6px 5px rgba(58, 18, 13, 0), 0px 0px 0px 2px #c2a782, 0px 0px 0px 4px #a58e6f, 3px 4px 8px 5px rgba(0, 0, 0, 0.5);
+            background-color: #333;
+            opacity: 0;
+            transform: scale(0.5) rotate(-5deg);
+            animation: zoomInRotate 1.5s ease forwards;
+        }
+
+        @keyframes zoomInRotate {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-30deg);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.05) rotate(10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .blackboard h2 {
+            color: rgba(238, 238, 238, 0.7);
+            font-size: 2.5em;
+            text-align: center;
+        }
+
+        .blackboard p.text-muted {
+            color: rgba(238, 238, 238, 0.7);
+            text-align: center;
+        }
+
+        .form {
+            padding: 20px 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1.4em;
+            color: rgba(238, 238, 238, 0.7);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.4em;
+            color: rgba(238, 238, 238, 0.8);
+            background: none;
+            border: none;
+            outline: none;
+            border-bottom: 2px solid rgba(238, 238, 238, 0.5);
+            margin-top: 5px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-bottom-color: rgba(238, 238, 238, 0.8);
+        }
+
+        .form-group input[type="submit"] {
+            cursor: pointer;
+            background: #a7e245;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1.5em;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-group img {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .form-group a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #a7e245;
+            text-decoration: none;
+        }
+
+        .form h5 {
+            color: rgba(238, 238, 238, 0.7);
+            font-size: 1.8em;
+        }
+
+        @media (max-width: 768px) {
+            .blackboard {
+                width: 90%;
+                padding: 30px;
+            }
+        }
+
+        /* Hide the nominee contact section initially */
+        #nomineeContact {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="shade">
+    <div class="blackboard">
+        <h2>IIIT-D Alumni Nomination Form</h2>
+        <p class="text-muted">Please fill out this form to nominate a deserving candidate for the IIIT-Delhi Young Alumni Awards.</p>
+
+        <form class="form">
+            <!-- Nominee Selection -->
+            <div class="form-group">
+                <label for="nomination" class="required">Who Are You Nominating?</label>
+                <select id="nomination" name="nomination" required onchange="toggleNomineeInfo()">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="self">Nominating Yourself</option>
+                    <option value="someone_else">Nominating Someone Else</option>
+                </select>
+            </div>
+
+            <!-- Criteria Selection -->
+            <div class="form-group">
+                <label for="criteria" class="required">Which of the following criteria does the nominee meet?</label>
+                <select id="criteria" name="criteria" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="work">Notable contribution to field of work</option>
+                    <option value="innovation">Contribution to Knowledge/Technological Innovation</option>
+                    <option value="society">Contribution to Society/Community</option>
+                    <option value="leadership">Leadership/Entrepreneurship</option>
+                </select>
+            </div>
+
+            <!-- Your Contact Information -->
+            <h5>Your Contact Information</h5>
+
+            <div class="form-group">
+                <label for="yourTitle" class="required">Your Title</label>
+                <input id="yourTitle" name="yourTitle" placeholder="Eg: Mr, Ms, Dr, Prof" type="text" required>
+            </div>
+
+            <div class="form-group">
+                <label for="yourName" class="required">Your Name</label>
+                <input id="yourName" name="yourName" placeholder="Your Full Name" type="text" required>
+            </div>
+
+            <div class="form-group">
+                <label for="yourEmail" class="required">Your Email Address</label>
+                <input id="yourEmail" name="yourEmail" placeholder="Your Email Address" type="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="yourPhone" class="required">Your Phone Number</label>
+                <input id="yourPhone" name="yourPhone" placeholder="Your Phone Number" type="text" required>
+            </div>
+
+            <!-- Nominee's Contact Information (Hidden until needed) -->
+            <div id="nomineeContact">
+                <h5>Nominee's Contact Information</h5>
+
+                <div class="form-group">
+                    <label for="nomineeTitle" class="required">Nominee's Title</label>
+                    <input id="nomineeTitle" name="nomineeTitle" placeholder="Eg: Mr, Ms, Dr, Prof" type="text">
+                </div>
+
+                <div class="form-group">
+                    <label for="nomineeName" class="required">Nominee's Name</label>
+                    <input id="nomineeName" name="nomineeName" placeholder="Nominee's Full Name" type="text">
+                </div>
+
+                <div class="form-group">
+                    <label for="nomineeEmail" class="required">Nominee's Email Address</label>
+                    <input id="nomineeEmail" name="nomineeEmail" placeholder="Nominee's Email Address" type="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="nomineePhone" class="required">Nominee's Phone Number</label>
+                    <input id="nomineePhone" name="nomineePhone" placeholder="Nominee's Phone Number" type="text">
+                </div>
+
+                <div class="form-group">
+                    <label for="nomineeProgram" class="required">Nominee's Program</label>
+                    <select id="nomineeProgram" name="nomineeProgram">
+                        <option value="" disabled selected>Select Program</option>
+                        <option value="BTech">B.Tech</option>
+                        <option value="MTech">M.Tech</option>
+                        <option value="PhD">Ph.D.</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="nomineeYear" class="required">Nominee's Year Of Graduation</label>
+                    <select id="nomineeYear" name="nomineeYear">
+                        <option value="" disabled selected>Select Year</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="nomineeOrg" class="required">Nominee's Current Organisation</label>
+                    <input id="nomineeOrg" name="nomineeOrg" placeholder="Nominee's Organisation" type="text">
+                </div>
+
+                <div class="form-group">
+                    <label for="nomineeDesignation" class="required">Nominee's Current Designation</label>
+                    <input id="nomineeDesignation" name="nomineeDesignation" placeholder="Nominee's Designation" type="text">
+                </div>
+
+                <div class="form-group">
+                    <label for="nomineeLinkedIn" class="required">Nominee's LinkedIn Profile Link</label>
+                    <input id="nomineeLinkedIn" name="nomineeLinkedIn" placeholder="Nominee's LinkedIn Profile" type="url">
+                </div>
+            </div>
+
+            <!-- Additional Info and File Upload -->
+            <div class="form-group">
+                <label for="nomineeDetails" class="required">Elaborate on How the Contributions Are Significant</label>
+                <textarea id="nomineeDetails" name="nomineeDetails" placeholder="Write 100-200 words" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="fileUpload" class="required">Attach Supporting Document</label>
+                <input id="fileUpload" name="fileUpload" class="form-control-file" type="file" required>
+            </div>
+
+            <!-- Captcha -->
+            <div class="form-group">
+                <label for="captcha" class="required">Type the Security Code Below</label>
+                <img src="captcha.png" alt="Captcha Image" class="img-fluid">
+                <input id="captcha" name="captcha" type="text" placeholder="Enter the code" required>
+                <a href="#" onclick="return false;">Refresh</a>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <input type="submit" value="Submit Nomination">
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- JavaScript to show/hide nominee info based on selection -->
+<script>
+    function toggleNomineeInfo() {
+        const nominationType = document.getElementById('nomination').value;
+        const nomineeSection = document.getElementById('nomineeContact');
+        
+        if (nominationType === 'someone_else') {
+            nomineeSection.style.display = 'block';
+        } else {
+            nomineeSection.style.display = 'none';
+        }
+    }
+</script>
+
+</body>
+</html>

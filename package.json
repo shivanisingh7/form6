@@ -1,0 +1,10 @@
+{
+  "name": "academic-nomination-form",
+  "version": "1.0.0",
+  "description": "A simple academic nomination form using HTML, CSS, and Bootstrap",
+  "main": "index.html",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "author": "Shivani Singh"
+}

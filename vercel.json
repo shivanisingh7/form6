@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "public": {
+    "maxAge": 31536000
+  },
+  "routes": [
+    { "src": "/", "dest": "/index.html" }
+  ]
+}

@@ -3,8 +3,5 @@
   "builds": [
     { "src": "index.html", "use": "@vercel/static" }
   ],
-  "public": false,  // Ensure this is a boolean value
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api" }
-  ]
+  "public": false
 }
